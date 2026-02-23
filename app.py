@@ -14,3 +14,10 @@ mycursor = mydb.cursor()
 mycursor.execute("SELECT * FROM productos")
 myresult = mycursor.fetchall()
 return make_response(jsonify(myresult))
+
+mycursor = mydb.cursor()
+sql = "INSERT INTO productos (titulo, descripcion, precio, talla, estado, disponible) VALUES (%s, %s, %s, %s, %s, %s)"
+val = (request.form['txtTitulo'], request.form['txtDescripcion'], request.form['txtPrecio'], request.form['txtTalla'], request.form['txtEstado'], request.form['txtDisponible'])
+mycursor.execute(sql, val)
+
+mydb.commit()
